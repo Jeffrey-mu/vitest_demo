@@ -19,12 +19,13 @@ describe('renders a todo', () => {
     `)
     expect(todo.text()).toBe('Learn Vue.js 3')
   })
+  // 修改测试用例 添加async await
   it('creates a todo', async () => {
     const wrapper = mount(TodoApp)
     expect(wrapper.findAll('[data-test="todo"]')).toHaveLength(1)
 
-    wrapper.get('[data-test="new-todo"]').setValue('New todo')
-    wrapper.get('[data-test="form"]').trigger('submit')
+    await wrapper.get('[data-test="new-todo"]').setValue('New todo')
+    await wrapper.get('[data-test="form"]').trigger('submit')
     expect(wrapper.findAll('[data-test="todo"]')).toMatchInlineSnapshot(`
       [
         DOMWrapper {
@@ -35,11 +36,18 @@ describe('renders a todo', () => {
             Learn Vue.js 3
           </div>,
         },
+        DOMWrapper {
+          "isDisabled": [Function],
+          "wrapperElement": <div
+            data-test="todo"
+          >
+            New todo
+          </div>,
+        },
       ]
     `)
-    // test: 测试无法通过 .toHaveLength为 1
-    // dom更新为异步
-    expect(wrapper.findAll('[data-test="todo"]')).toHaveLength(2)
+    // 异步获取长度
+    await expect(wrapper.findAll('[data-test="todo"]')).toHaveLength(2)
 
   })
 
