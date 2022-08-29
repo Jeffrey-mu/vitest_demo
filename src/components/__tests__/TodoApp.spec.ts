@@ -22,5 +22,11 @@ describe('renders a todo', () => {
     await expect(wrapper.findAll('[data-test="todo"]')).toHaveLength(2)
 
   })
+  it('completes a todo', async () => {
+    const wrapper = mount(TodoApp)
 
+    await wrapper.get('[data-test="todo-checkbox"]').setValue(true)
+
+    expect(wrapper.get('[data-test="todo"]').classes()).toContain('completed')
+  })
 })
