@@ -7,16 +7,7 @@ describe('renders a todo', () => {
     const wrapper = mount(TodoApp)
 
     const todo = wrapper.get('[data-test="todo"]')
-    expect(todo).toMatchInlineSnapshot(`
-      DOMWrapper {
-        "isDisabled": [Function],
-        "wrapperElement": <div
-          data-test="todo"
-        >
-          Learn Vue.js 3
-        </div>,
-      }
-    `)
+
     expect(todo.text()).toBe('Learn Vue.js 3')
   })
   // 修改测试用例 添加async await
@@ -26,26 +17,7 @@ describe('renders a todo', () => {
 
     await wrapper.get('[data-test="new-todo"]').setValue('New todo')
     await wrapper.get('[data-test="form"]').trigger('submit')
-    expect(wrapper.findAll('[data-test="todo"]')).toMatchInlineSnapshot(`
-      [
-        DOMWrapper {
-          "isDisabled": [Function],
-          "wrapperElement": <div
-            data-test="todo"
-          >
-            Learn Vue.js 3
-          </div>,
-        },
-        DOMWrapper {
-          "isDisabled": [Function],
-          "wrapperElement": <div
-            data-test="todo"
-          >
-            New todo
-          </div>,
-        },
-      ]
-    `)
+
     // 异步获取长度
     await expect(wrapper.findAll('[data-test="todo"]')).toHaveLength(2)
 
