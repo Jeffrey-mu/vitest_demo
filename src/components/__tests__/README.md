@@ -197,4 +197,19 @@ describe('renders a todo', () => {
 最后，我们做一个断言。我们将为completed完成的 todo 应用一个类——然后我们可以使用它来添加一些样式以直观地指示一个 todo 的状态。
 
 我们可以通过更新todo 元素`<template>`以包含`<input type="checkbox">`和类绑定来通过此测试：
+```html
+ <div
+  v-for="todo in todos"
+  :key="todo.id"
+  data-test="todo"
+  :class="[todo.completed ? 'completed' : '']"
+>
+  {{ todo.text }}
+  <input
+    type="checkbox"
+    v-model="todo.completed"
+    data-test="todo-checkbox"
+  />
+</div>
+```
 恭喜！您编写了第一个组件测试。
